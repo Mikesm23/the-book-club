@@ -14,7 +14,7 @@ const bookSchema = new Schema({
     type: String,
     required: true
   },
-  cover: {
+  bookCover: {
     type: String,
     required: true
   },

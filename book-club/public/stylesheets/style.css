@@ -10,3 +10,7 @@ a {
 h1 {
   color: 15px;
 }
+
+.create-book-form {
+  width: 200px;
+}

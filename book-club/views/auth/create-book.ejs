@@ -1,10 +1,45 @@
 <h1>Create a book</h1>
+<div class="create-book-form">
+  <form action="/book/create" method="POST">
+    <label
+      >Title:
+      <input type="text" name="title" placeholder="book title" required />
+    </label>
 
-<form action="">
-  <label required>Title:</label>
-  <label required>Author</label>
-  <label required>Genre:</label>
-  <label required>Picture:</label>
-  <label required>Plot:</label>
-  <label required>ISBN:</label>
-</form>
+    <label
+      >Author
+      <input type="text" name="author" placeholder="author's name" required />
+    </label>
+
+    <label
+      >Genre:
+      <input
+        type="text"
+        name="genre"
+        placeholder="fantasy/horror/..."
+        required
+      />
+    </label>
+
+    <label
+      >Picture:
+      <input
+        type="text"
+        name="bookCover"
+        placeholder="input pucture URL here"
+        required
+      />
+    </label>
+
+    <label
+      >Plot:
+      <textarea name="plot" placehlder="paste plot in here" required></textarea>
+    </label>
+
+    <label
+      >ISBN:
+      <input type="text" name="plot" placeholder="1234567891234" required />
+    </label>
+    <button>Create book entry</button>
+  </form>
+</div>

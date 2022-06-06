@@ -16,8 +16,8 @@ const userSchema = new Schema(
     },
 
     firstName: {
-      type: String,
-      required: true,
+      type: String
+      //required: true,
     },
 
     password: {
@@ -26,26 +26,22 @@ const userSchema = new Schema(
     },
 
     lastName: {
-      type: String,
-      required: true,
-    },
-
-    picture: {
-      
-    },
-
-    favoriteBook: {
-
-    },
-
-    books: {
-      
+      type: String
     }
-  },
-  
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
-    timestamps: true,
+      //required: true
+    // },
+
+    // picture: {
+      
+    // },
+
+    // favoriteBook: {
+
+    // },
+
+    // books: {
+      
+    // }
   }
 );
 
