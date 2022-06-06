@@ -1,3 +1,11 @@
 <h3>Profile Page</h3>
-<div><% if (typeof user !== 'undefined') {%> <%} %></div>
-<p>Hello <%= user.username%></p>
+
+<% if(user) { %>
+<h2>Welcome, <%= user.username %>!</h2>
+<p>This is your profile page my friend!</p>
+<button>
+  <a href="/profile">Reload the page</a>
+</button>
+<% } else { %>
+<p>Still not logged in user, sorry!</p>
+<% } %>

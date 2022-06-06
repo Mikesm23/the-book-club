@@ -13,7 +13,7 @@ const app = express()
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require('./config')(app)
-
+require('./config/sessions.config')(app)
 // default value for title local
 const capitalized = require('./utils/capitalized')
 const projectName = 'book-club'

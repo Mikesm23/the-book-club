@@ -1,6 +1,5 @@
-// Miguel: I pasted this code here but I didn't adapt it.
 
-/*
+
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
@@ -17,7 +16,7 @@ module.exports = app => {
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        maxAge: 300000
+        maxAge: 60000
       },
       store: MongoStore.create({
         mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost/book-club'
@@ -25,4 +24,3 @@ module.exports = app => {
     })
   );
 };
-*/

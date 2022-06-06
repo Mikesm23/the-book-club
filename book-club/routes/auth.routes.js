@@ -15,7 +15,7 @@ router.get("/login", (req, res) => {
 
 /* POST Login User */
 router.post('/login', (req, res, next) => {
-  // console.log('SESSION =====> ', req.session);
+  console.log('SESSION =====> ', req.session);
   const { email, password } = req.body;
 
   if (email === '' || password === '') {
@@ -34,8 +34,8 @@ router.post('/login', (req, res, next) => {
       }
       else if (bcryptjs.compareSync(password, user.password)) {
         console.log(user, "this is my user")
-        // req.session.currentUser = user
-        res.redirect('profile', {user}); 
+        req.session.currentUser = user
+        res.redirect('/profile');  
       } else {
         res.render('auth/login', { errorMessage: 'Incorrect password.' });
       }
@@ -78,7 +78,7 @@ router.post("/signup", (req, res, next) => {
     .catch(error => {
       if (error.code === 11000) {
         res.status(500).render('signup', {
-           errorMessage: 'Username or Email already taken.'
+          errorMessage: 'Username or Email already taken.'
         });
       } else {
         next(error);
@@ -90,7 +90,7 @@ router.post("/signup", (req, res, next) => {
 /* Profile Page */
 /* GET View Profile Page */
 router.get("/profile", (req, res) => {
-    res.render("auth/profile");
+    res.render("auth/profile", { user: req.session.currentUser });
   });
 
 /* POST Update Profile/User - NOT MVP*/
