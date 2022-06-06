@@ -1,0 +1,15 @@
+<h2>List of Books</h2>
+<% listBooks.forEach(book => { %>
+<div>
+  <p>Title: <%= book.title %></p>
+  <p>Author: <%= book.propellers %></p>
+  <p>Genre: <%= book.genre %></p>
+  <p>Plot: <%= book.plot %></p>
+  <p>ISBN: <%= book.isbn %></p>
+  <a href="/book-details">See details</a>
+</div>
+<% }) %>
+
+<a href="/create-book">Create a new Book</a>
+
+<!-- we need to remember inserting the book/display the book url-->

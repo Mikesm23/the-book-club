@@ -12,19 +12,19 @@ const bookSchema = new Schema({
   },
   genre: {
     type: String,
-    required: true
+    required: true,
   },
   bookCover: {
     type: String,
-    required: true
+    //required: true
   },
   plot: {
     type: String,
-    required: true
+    required: true,
   },
   isbn: {
     type: Number,
-    required: true
+    required: true,
   }
 });
 

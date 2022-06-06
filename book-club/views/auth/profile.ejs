@@ -3,9 +3,10 @@
 <% if(user) { %>
 <h2>Welcome, <%= user.username %>!</h2>
 <p>This is your profile page my friend!</p>
-<button>
-  <a href="/profile">Reload the page</a>
-</button>
 <% } else { %>
 <p>Still not logged in user, sorry!</p>
 <% } %>
+
+<button>
+  <a href="/create-book">Create Book</a>
+</button>

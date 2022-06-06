@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs')
 const session = require("express-session")
 const mongo = require("connect-mongo")
 const User = require('../models/User.model')
+const Book = require('../models/Book.model')
 const saltRounds = 10
 
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
@@ -116,24 +117,33 @@ router.get("/create-book", (req, res) => {
   
 /* POST Create New Book -- including a redirection to the books detail page*/
 
-// router.post('/book/create', (req, res) => {
-// try {
-//   console.log(req.body)
-// const {title, author, genre, bookCover, plot, isbn} = req.body;
+router.post('/create-book', async (req, res) => {
+try {
+  console.log(req.body)
+  const {title, author, genre, bookCover, plot, isbn} = req.body;
 
 // await Book.create({title, author, genre, bookCover, plot, isbn})
-
-// res.redirect('auth/book-details', ); // include object containing book-data to be rendered in book-details page
-// } catch (error){
-// console.log ("Creating and storing a book in the database failed", (error))
-// }
-// }) 
+const newBook = await Book.create({title, author, genre, bookCover, plot, isbn})
+res.redirect(`/book-details/${newBook._id}`); 
+} catch (error){
+console.log ("Creating and storing a book in the database failed", (error))
+}
+}) 
 
 
 /* Book details page */
 /* GET Route - View Book */
-router.get("/book-details", (req, res) => {
-  res.render("auth/book-details");
+router.get("/book-details/:id", (req, res) => {
+ Book.findById(req.params.id)
+ .then ((detailsBooks) => {
+  console.log(detailsBooks, "here");
+  res.render('auth/book-details', {detailsBooks})
+})
+.catch((err) => {
+    console.error("Error viewing Details: ", err);
+  })
+res.render("auth/book-details"); // , {} insert object with book data
+// res.render("auth/book-details", {detailsBooks});
 });
 
 /* POST Route - Update Book */
@@ -144,8 +154,11 @@ router.get("/book-details", (req, res) => {
 
 /* Books List Page */
 /* GET Route - View Book List */
-router.get("/books-list", (req, res) => {
-  res.render("auth/books-list");
+router.get('/books-list', (req, res, next) => {
+ Book.find()
+  .then ((listBooks) => {
+    res.render('auth/books-list', {listBooks})
+  })
 });
 
 
