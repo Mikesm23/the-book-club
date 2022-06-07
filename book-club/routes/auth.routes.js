@@ -124,7 +124,7 @@ try {
 
 // await Book.create({title, author, genre, bookCover, plot, isbn})
 const newBook = await Book.create({title, author, genre, bookCover, plot, isbn})
-res.redirect(`/book-details/${newBook._id}`); 
+res.redirect(`/book-details/${newBook._id}`); // , {newBook} -- did not work, crashed
 } catch (error){
 console.log ("Creating and storing a book in the database failed", (error))
 }
@@ -142,7 +142,7 @@ router.get("/book-details/:id", (req, res) => {
 .catch((err) => {
     console.error("Error viewing Details: ", err);
   })
-res.render("auth/book-details"); // , {} insert object with book data
+// res.render("auth/book-details"); // , {} insert object with book data
 // res.render("auth/book-details", {detailsBooks});
 });
 

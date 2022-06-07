@@ -2,11 +2,11 @@
 <% listBooks.forEach(book => { %>
 <div>
   <p>Title: <%= book.title %></p>
-  <p>Author: <%= book.propellers %></p>
+  <p>Author: <%= book.author %></p>
   <p>Genre: <%= book.genre %></p>
   <p>Plot: <%= book.plot %></p>
   <p>ISBN: <%= book.isbn %></p>
-  <a href="/book-details">See details</a>
+  <a href="/book-details/<%= book.id %>">See details</a>
 </div>
 <% }) %>
 
