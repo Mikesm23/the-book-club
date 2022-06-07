@@ -1,11 +1,12 @@
 <h3>Book Details Page</h3>
 <% if (typeof detailsBooks !== 'undefined') {%>
-<p><%= detailsBooks.title%></p>
+<p>Title: <%= detailsBooks.title%></p>
 <p>Author: <%= detailsBooks.author %></p>
 <p>Genre: <%= detailsBooks.genre %></p>
 <p>Plot: <%= detailsBooks.plot %></p>
 <p>ISBN: <%= detailsBooks.isbn %></p>
 <%} %>
 
+<a href="/edit-book/<%= detailsBooks.id %>">Edit Book</a>
 <a href="/create-book">Create a new Book</a>
 <a href="/books-list">See general booklist</a>

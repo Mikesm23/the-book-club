@@ -1,0 +1,65 @@
+<h1>Edit a book</h1>
+<!-- insert specific book title later-->
+
+<div class="create-book-form">
+  <form action="/edit-book/<%= toUpdateBook._id %>" method="POST">
+    <label>
+      Title:
+      <input
+        type="text"
+        name="title"
+        placeholder="<%= toUpdateBook.title %>"
+        required
+      />
+    </label>
+    <br />
+    <label
+      >Author:
+      <input
+        type="text"
+        name="author"
+        placeholder="<%= toUpdateBook.author %>"
+        required
+      />
+    </label>
+    <br />
+    <label
+      >Genre:
+      <input
+        type="text"
+        name="genre"
+        placeholder="<%= toUpdateBook.genre %>"
+        required
+      />
+    </label>
+    <br />
+    <label
+      >Picture:
+      <input
+        type="text"
+        name="bookCover"
+        placeholder="<%= toUpdateBook.bookCover %>"
+      />
+    </label>
+    <br />
+    <label
+      >Plot:
+      <textarea
+        name="plot"
+        placeholder="<%= toUpdateBook.plot %>"
+        required
+      ></textarea>
+    </label>
+    <br />
+    <label
+      >ISBN:
+      <input
+        type="text"
+        name="isbn"
+        placeholder="<%= toUpdateBook.isbn %>"
+        required
+      />
+    </label>
+    <button type="submit">Update Book</button>
+  </form>
+</div>

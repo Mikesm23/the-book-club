@@ -16,7 +16,7 @@ router.get("/login", (req, res) => {
 
 /* POST Login User */
 router.post('/login', (req, res, next) => {
-  console.log('SESSION =====> ', req.session);
+  //console.log('SESSION =====> ', req.session);
   const { email, password } = req.body;
 
   if (email === '' || password === '') {
@@ -54,7 +54,7 @@ router.get("/signup", (req, res) => {
     res.render("signup");
   });
 
-/* POST Create User - Don't forget bcrypt and salt */
+/* POST Create User */
 router.post("/signup", (req, res, next) => {
 
   const { username, email, password } = req.body;
@@ -74,7 +74,7 @@ router.post("/signup", (req, res, next) => {
 
     })
     .then( () => {
-      res.redirect('/')
+      res.redirect('/login');
     })
     .catch(error => {
       if (error.code === 11000) {
@@ -94,19 +94,49 @@ router.get("/profile", (req, res) => {
     res.render("auth/profile", { user: req.session.currentUser });
   });
 
-/* POST Update Profile/User - NOT MVP*/
+  /* GET View Update Profile Page*/
+router.get('/update-profile/:id', (req, res) => {
+    User.findById(req.params.id)
+    .then ((toUpdateUser) => {
+      console.log(toUpdateUser)
+      res.render('auth/update-profile', {toUpdateUser})
+    })
+  });
+
+/* POST Update Profile/User - NOT MVP Not adjusted yet!!   */
+router.post('/update-profile/:userId', async (req, res) => {   // create userId?
+  try {
+    console.log("editing profile-function opens!!!");
+    const {username, email, password, firstName, lastName, favoriteBook, books} = req.body; 
+    const {userId} = req.params
+    const updatedUser = await User.findByIdAndUpdate(userId, {username, email, password, firstName, lastName, favoriteBook, books}, {new: true})
+    
+    res.redirect(`/profile`); // /${updatedUser._id}
+  } catch (error){
+      console.log ("Updating the profile in the database failed", (error))
+    }
+})
+
+router.post('/edit-book/:bookId', async (req, res) => { 
+  try {
+    console.log("editing function opens!!!")
+      const {title, author, genre, bookCover, plot, isbn} = req.body;
+      const {bookId} = req.params
+      const updatedBook = await Book.findByIdAndUpdate(bookId, {title, author, genre, plot, isbn}, {new: true})
+       res.redirect(`/book-details/${updatedBook._id}`);
+  } catch (error){
+      console.log ("Updating a book in the database failed", (error))
+     }
+    })
 
 /* POST Delete Profile/User */ // Doubt about the path
-router.post('/auth/:id/delete', (req, res, next) => {
+router.post('/auth/:id', (req, res, next) => {
+  console.log("CHECK HERE PARAMS ----->", req.params)
   User.findByIdAndDelete(req.params.id)
   .then (() => {
     res.redirect('/')
   })
 });
-/* CODE TO INSERT IN EJS FILE:
-<form action="/auth/<%= element.id %>/delete" method="POST">
-    <button type="submit">Delete</button>
-*/
 
 
 /* Create-book Page */
@@ -122,14 +152,15 @@ try {
   console.log(req.body)
   const {title, author, genre, bookCover, plot, isbn} = req.body;
 
-// await Book.create({title, author, genre, bookCover, plot, isbn})
 const newBook = await Book.create({title, author, genre, bookCover, plot, isbn})
-res.redirect(`/book-details/${newBook._id}`); // , {newBook} -- did not work, crashed
+//.then(dbPost => {
+// return User.findByIdAndUpdate(author, { $push: { books: books._id } }); // newly added for db reference!
+res.redirect(`/book-details/${newBook._id}`);
+
 } catch (error){
 console.log ("Creating and storing a book in the database failed", (error))
 }
 }) 
-
 
 /* Book details page */
 /* GET Route - View Book */
@@ -142,15 +173,28 @@ router.get("/book-details/:id", (req, res) => {
 .catch((err) => {
     console.error("Error viewing Details: ", err);
   })
-// res.render("auth/book-details"); // , {} insert object with book data
-// res.render("auth/book-details", {detailsBooks});
 });
 
-/* POST Route - Update Book */
+/* Get Route - Update Book */
+router.get('/edit-book/:id', (req, res) => {
+  Book.findById(req.params.id)
+  .then ((toUpdateBook) => {
+    console.log(toUpdateBook)
+    res.render('auth/edit-book', {toUpdateBook})
+  })
+});
 
-
-/* POST Route - Delete Book */
-
+router.post('/edit-book/:bookId', async (req, res) => { 
+  try {
+    console.log("editing function opens!!!")
+      const {title, author, genre, bookCover, plot, isbn} = req.body;
+      const {bookId} = req.params
+      const updatedBook = await Book.findByIdAndUpdate(bookId, {title, author, genre, plot, isbn}, {new: true})
+       res.redirect(`/book-details/${updatedBook._id}`);
+  } catch (error){
+      console.log ("Updating a book in the database failed", (error))
+     }
+    })
 
 /* Books List Page */
 /* GET Route - View Book List */
@@ -161,10 +205,8 @@ router.get('/books-list', (req, res, next) => {
   })
 });
 
-
 /*  ADMIN                 */
 /* POST ROUTE - Edit books from books list */
-
 /* DELETE Route - books list*/
 /* DELETE Route - books list -- comment section*/
 

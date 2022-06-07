@@ -2,7 +2,7 @@
 
 <% if(user) { %>
 <h2>Welcome, <%= user.username %>!</h2>
-<p>This is your profile page my friend!</p>
+<p>This is your Bookworms profile page!</p>
 <% } else { %>
 <p>Still not logged in user, sorry!</p>
 <% } %>
@@ -10,3 +10,11 @@
 <button>
   <a href="/create-book">Create Book</a>
 </button>
+
+<button>
+  <a href="/update-profile/<%= user._id %>">Update Profile</a>
+</button>
+
+<form action="/auth/<%= user._id %>" method="POST">
+  <button type="submit">Delete Profile</button>
+</form>

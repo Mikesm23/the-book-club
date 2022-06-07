@@ -12,5 +12,10 @@ h1 {
 }
 
 .create-book-form {
-  width: 200px;
+  width: 400px;
+}
+
+textarea {
+  width: 400px;
+  height: 200px;
 }

@@ -16,7 +16,6 @@ const bookSchema = new Schema({
   },
   bookCover: {
     type: String,
-    //required: true
   },
   plot: {
     type: String,
@@ -25,7 +24,9 @@ const bookSchema = new Schema({
   isbn: {
     type: Number,
     required: true,
-  }
+  },
+  books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+  
 });
 
 const Book = model("Book", bookSchema);

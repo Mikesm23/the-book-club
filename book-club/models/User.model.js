@@ -5,7 +5,6 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
       unique: true
     },
     
@@ -15,33 +14,26 @@ const userSchema = new Schema(
       unique: true
     },
 
-    firstName: {
-      type: String
-      //required: true,
-    },
-
     password: {
       type: String,
       required: true,
     },
 
-    lastName: {
+    firstName: {
       type: String
-    }
-      //required: true
-    // },
+    },
 
-    // picture: {
+    lastName: {
+      type: String,
+    },
+
+    favoriteBook: {
+
+   },
+
+    books: {
       
-    // },
-
-    // favoriteBook: {
-
-    // },
-
-    // books: {
-      
-    // }
+  }
   }
 );
 

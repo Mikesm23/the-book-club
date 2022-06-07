@@ -1,0 +1,61 @@
+<h2>Hi <%= toUpdateUser.username %>, you can update your info here:</h2>
+<div class="create-book-form">
+  <form action="/update-profile/<%= toUpdateUser._id %>" method="POST">
+    <label for="username">Username</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      placeholder="<%= toUpdateUser.username %>"
+      required
+    />
+    <br />
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      id="firstName"
+      name="firstName"
+      placeholder="<%= toUpdateUser.firstName %>"
+    />
+    <br />
+    <label for="secondName">Second Name</label>
+    <input
+      type="text"
+      id="secondName"
+      name="secondName"
+      placeholder="<%= toUpdateUser.secondName %>"
+    />
+    <br />
+    <label for="email">Email</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      placeholder="<%= toUpdateUser.email %>"
+      required
+    />
+    <br />
+    <label for="password">Password</label>
+    <input
+      type="text"
+      id="password"
+      name="password"
+      placeholder="<%= toUpdateUser.password %>"
+      required
+    />
+    <br />
+    <label for="favoriteBook">Favorite Book</label>
+    <input
+      type="text"
+      id="favoriteBook"
+      name="favoriteBook"
+      placeholder="The Simpsons Biography"
+    />
+    <br />
+    <br />
+    <form action="/auth/<%= toUpdateUser._id %>" method="POST">
+      <button type="submit">Update Profile</button>
+    </form>
+  </form>
+</div>
+<!-- toUpdateUser -->
