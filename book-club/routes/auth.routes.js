@@ -15,7 +15,7 @@ router.get("/login", (req, res) => {
 });
 
 /* POST Login User */
-router.post('/login', (req, res, next) => {
+router.post('/login', (req, res) => {
   //console.log('SESSION =====> ', req.session);
   const { email, password } = req.body;
 
@@ -26,6 +26,7 @@ router.post('/login', (req, res, next) => {
     return;
   }
   User.findOne({ email })
+    .populate('books')
     .then(user => {
       if (!user) {
         res.render('auth/login', {
@@ -50,7 +51,7 @@ router.post('/login', (req, res, next) => {
 
 
 /* Logout User */
-router.post('/logout', (req, res, next) => {
+router.post('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) next(err);
     res.redirect('/');
@@ -64,7 +65,7 @@ router.get("/signup", (req, res) => {
   });
 
 /* POST Create User */
-router.post("/signup", (req, res, next) => {
+router.post("/signup", (req, res) => {
 
   const { username, email, password } = req.body;
 
@@ -99,8 +100,10 @@ router.post("/signup", (req, res, next) => {
 
 /* Profile Page */
 /* GET View Profile Page */
-router.get("/profile", (req, res) => {
-    res.render("auth/profile", { user: req.session.currentUser });
+router.get("/profile", isLoggedIn, async (req, res, next) => {
+    const mostCurrentUser = await User.findById(req.session.currentUser._id) 
+    .populate('books')
+    res.render("auth/profile", { user: mostCurrentUser } );
   }); // --> Working code!
 
   /*router.get('/profile', (req, res, next) => {
@@ -116,7 +119,7 @@ router.get("/profile", (req, res) => {
   });*/
 
   /* GET View Update Profile Page*/
-router.get('/update-profile/:id', (req, res) => {
+router.get('/update-profile/:id', isLoggedIn, (req, res, next) => {
     User.findById(req.params.id)
     .then ((toUpdateUser) => {
       console.log(toUpdateUser)
@@ -151,7 +154,7 @@ router.post('/edit-book/:bookId', async (req, res) => {
     })
 
 /* POST Delete Profile/User */
-router.post('/auth/:id', (req, res, next) => {
+router.post('/auth/:id', (req, res) => {
   console.log("CHECK HERE PARAMS ----->", req.params)
   User.findByIdAndDelete(req.params.id)
   .then (() => {
@@ -162,7 +165,7 @@ router.post('/auth/:id', (req, res, next) => {
 
 /* Create-book Page */
 /* GET View Create-book Form */
-router.get("/create-book", (req, res) => {
+router.get("/create-book", isLoggedIn, (req, res, next) => {
     res.render("auth/create-book");
   });
   
@@ -172,18 +175,18 @@ router.post('/create-book', async (req, res) => {
 try {
   console.log(req.body)
   const {title, author, genre, bookCover, plot, isbn} = req.body;
-
-const newBook = await Book.create({title, author, genre, bookCover, plot, isbn})
-
-res.redirect(`/book-details/${newBook._id}`);
-
+  const owner = req.session.currentUser._id
+  const newBook = await Book.create({title, author, genre, bookCover, plot, isbn, owner});
+  const updatedUser = await User.updateOne({_id:owner}, {$push: {books: [newBook]}})
+  console.log("updated User:", updatedUser);
+  res.redirect(`/book-details/${newBook._id}`);
 } catch (error){
-console.log ("Creating and storing a book in the database failed", (error))}
+  console.log ("Creating and storing a book in the database failed", (error))}
 }) 
 
 /* Book details page */
 /* GET Route - View Book */
-router.get("/book-details/:id", (req, res) => {
+router.get("/book-details/:id", isLoggedIn, (req, res, next) => {
  Book.findById(req.params.id)
  .then ((detailsBooks) => {
   console.log(detailsBooks, "here");
@@ -195,7 +198,7 @@ router.get("/book-details/:id", (req, res) => {
 });
 
 /* Get Route - Update Book */
-router.get('/edit-book/:id', (req, res) => {
+router.get('/edit-book/:id', isLoggedIn, (req, res, next) => {
   Book.findById(req.params.id)
   .then ((toUpdateBook) => {
     console.log(toUpdateBook)
@@ -217,7 +220,7 @@ router.post('/edit-book/:bookId', async (req, res) => {
 
 /* Books List Page */
 /* GET Route - View Book List */
-router.get('/books-list', (req, res, next) => {
+router.get('/books-list', isLoggedIn, (req, res, next) => {
  Book.find()
   .then ((listBooks) => {
     res.render('auth/books-list', {listBooks})

@@ -23,7 +23,12 @@
   <button>Logout</button>
 </form>
 
-<div class="personal-book-list">
-  <!--list of h3's to display all uploaded books-->
-  <!--visible through for-loop that will create a heading for each index-->
+
+  <h3>Personal Book list</h3>
+  <ul>
+    <% let index = 0 %> 
+    <% for (index; index < user.books.length; index +=1) {%>
+    <li><%= user.books[index].title %></li>
+    <% } %>
+  </ul>
 </div>

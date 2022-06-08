@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const User = require('./User.model')
 
 const bookSchema = new Schema({
   title: {
@@ -24,8 +25,10 @@ const bookSchema = new Schema({
   isbn: {
     type: Number,
     required: true,
+  },
+  owner: {
+    type: Schema.Types.ObjectId, ref: 'User'
   }
-  
 });
 
 const Book = model("Book", bookSchema);
