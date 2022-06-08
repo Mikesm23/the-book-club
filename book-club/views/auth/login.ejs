@@ -1,15 +1,30 @@
-<h2>Login</h2>
-<form action="/login" method="POST">
-  <label for="email">Email</label>
-  <input type="text" id="email" name="email" required />
-  <label for="password">Password</label>
-
-  <input type="text" id="password" name="password" required />
-
-  <button type="submit">Log In</button>
-</form>
-<div>
-  <% if (typeof errorMessage !== 'undefined') {%>
-  <p><%= errorMessage%></p>
-  <%} %>
+<div class="full-screen-container-signup">
+  <div class="signup-form">
+    <h3 class="form-title">Login to the Bookworms Club!</h3>
+    <img
+      id="big_logo"
+      src="/images/bookworms_logo_big.png"
+      alt="bookworms logo"
+    />
+    <h4 class="form-text">
+      A place to keep track of the books you read and to see what others are
+      reading.
+    </h4>
+    <form action="/login" method="POST">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required />
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="text" id="password" name="password" required />
+      </div>
+      <button type="submit" class="form-btn">Sign In</button>
+    </form>
+    <div class="error-message">
+      <% if (typeof errorMessage !== 'undefined') {%>
+      <p><%= errorMessage%></p>
+      <%} %>
+    </div>
+  </div>
 </div>
