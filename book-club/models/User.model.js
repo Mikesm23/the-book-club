@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Book = require('./Book.model')
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
+
 const userSchema = new Schema(
   {
     username: {
@@ -24,13 +24,13 @@ const userSchema = new Schema(
     },
 
     lastName: {
-      type: String,
+      type: String
     },
 
     favoriteBook: {
 
    },
-    books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+    books: [{ type: Schema.Types.ObjectId, ref: Book }]
   }
 );
 

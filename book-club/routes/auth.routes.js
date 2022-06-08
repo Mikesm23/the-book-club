@@ -124,8 +124,8 @@ router.get('/update-profile/:id', (req, res) => {
     })
   });
 
-/* POST Update Profile/User - NOT MVP Not adjusted yet!!   */
-router.post('/update-profile/:userId', async (req, res) => {   // create userId?
+/* POST Update Profile/User */
+router.post('/update-profile/:userId', async (req, res) => {
   try {
     console.log("editing profile-function opens!!!");
     const {username, email, password, firstName, lastName, favoriteBook, books} = req.body; 
@@ -150,7 +150,7 @@ router.post('/edit-book/:bookId', async (req, res) => {
      }
     })
 
-/* POST Delete Profile/User */ // Doubt about the path
+/* POST Delete Profile/User */
 router.post('/auth/:id', (req, res, next) => {
   console.log("CHECK HERE PARAMS ----->", req.params)
   User.findByIdAndDelete(req.params.id)
@@ -166,7 +166,7 @@ router.get("/create-book", (req, res) => {
     res.render("auth/create-book");
   });
   
-/* POST Create New Book -- including a redirection to the books detail page*/
+/* POST Create New Book */
 
 router.post('/create-book', async (req, res) => {
 try {
@@ -174,7 +174,6 @@ try {
   const {title, author, genre, bookCover, plot, isbn} = req.body;
 
 const newBook = await Book.create({title, author, genre, bookCover, plot, isbn})
-//User.findByIdAndUpdate(author, { $push: { books: books._id } })= await Book.create({title, author, genre, bookCover, plot, isbn})
 
 res.redirect(`/book-details/${newBook._id}`);
 
