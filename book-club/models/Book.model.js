@@ -24,8 +24,7 @@ const bookSchema = new Schema({
   isbn: {
     type: Number,
     required: true,
-  },
-  books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+  }
   
 });
 

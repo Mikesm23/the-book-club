@@ -48,6 +48,15 @@ router.post('/login', (req, res, next) => {
   res.render("user-profile", { user: req.session.currentUser });
 });*/
 
+
+/* Logout User */
+router.post('/logout', (req, res, next) => {
+  req.session.destroy(err => {
+    if (err) next(err);
+    res.redirect('/');
+  });
+});
+
 /* Signup page */
 /* GET View Signup Form */
 router.get("/signup", (req, res) => {
@@ -92,7 +101,19 @@ router.post("/signup", (req, res, next) => {
 /* GET View Profile Page */
 router.get("/profile", (req, res) => {
     res.render("auth/profile", { user: req.session.currentUser });
-  });
+  }); // --> Working code!
+
+  /*router.get('/profile', (req, res, next) => {
+    User.find()
+    .populate("books")
+    .then ((listBooks) => {
+        console.log(listBooks)
+      res.render('profile', {listBooks})
+    })
+    .catch((err) => {
+        console.error("Error displaying Books: ", err);
+      })
+  });*/
 
   /* GET View Update Profile Page*/
 router.get('/update-profile/:id', (req, res) => {
@@ -153,13 +174,12 @@ try {
   const {title, author, genre, bookCover, plot, isbn} = req.body;
 
 const newBook = await Book.create({title, author, genre, bookCover, plot, isbn})
-//.then(dbPost => {
-// return User.findByIdAndUpdate(author, { $push: { books: books._id } }); // newly added for db reference!
+//User.findByIdAndUpdate(author, { $push: { books: books._id } })= await Book.create({title, author, genre, bookCover, plot, isbn})
+
 res.redirect(`/book-details/${newBook._id}`);
 
 } catch (error){
-console.log ("Creating and storing a book in the database failed", (error))
-}
+console.log ("Creating and storing a book in the database failed", (error))}
 }) 
 
 /* Book details page */

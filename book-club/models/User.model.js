@@ -30,10 +30,7 @@ const userSchema = new Schema(
     favoriteBook: {
 
    },
-
-    books: {
-      
-  }
+    books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
   }
 );
 
