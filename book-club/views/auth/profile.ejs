@@ -12,22 +12,23 @@
       <!-- <button>
         <a class="search-btn" href="/create-book">Create Book</a>
       </button> -->
+      <div class="btn-div">
+        <form action="/create-book" method="GET">
+          <button class="profile-btn" type="submit">Create Book</button>
+        </form>
 
-      <form action="/create-book" method="GET">
-        <button class="profile-btn" type="submit">Create Book</button>
-      </form>
+        <form action="/update-profile/<%= user._id %>" method="GET">
+          <button class="profile-btn" type="submit">Update Profile</button>
+        </form>
 
-      <form action="/update-profile/<%= user._id %>" method="GET">
-        <button class="profile-btn" type="submit">Update Profile</button>
-      </form>
+        <form action="/auth/<%= user._id %>" method="POST">
+          <button class="profile-btn" type="submit">Delete Profile</button>
+        </form>
 
-      <form action="/auth/<%= user._id %>" method="POST">
-        <button class="profile-btn" type="submit">Delete Profile</button>
-      </form>
-
-      <form id="logout-form" action="/logout" method="POST">
-        <button class="profile-btn">Logout</button>
-      </form>
+        <form id="logout-form" action="/logout" method="POST">
+          <button class="profile-btn">Logout</button>
+        </form>
+      </div>
     </div>
     <div id="book-list">
       <h3>Personal Book list</h3>

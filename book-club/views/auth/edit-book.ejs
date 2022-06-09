@@ -1,65 +1,68 @@
-<h1>Edit a book</h1>
-<!-- insert specific book title later-->
+<div class="full-screen-container-signup">
+  <div class="content-editbook">
+    <div class="signup-form">
+      <div id="createbook-title">
+        <h2>Edit book</h2>
+      </div>
+      <!-- old class: create-book-form -->
+      <form
+        action="/edit-book/<%= toUpdateBook._id %>"
+        method="POST"
+        class="input-group"
+      >
+        <label for="title">Title:</label>
+        <input
+          type="text"
+          name="title"
+          placeholder="<%= toUpdateBook.title %>"
+          required
+        />
 
-<div class="create-book-form">
-  <form action="/edit-book/<%= toUpdateBook._id %>" method="POST">
-    <label>
-      Title:
-      <input
-        type="text"
-        name="title"
-        placeholder="<%= toUpdateBook.title %>"
-        required
-      />
-    </label>
-    <br />
-    <label
-      >Author:
-      <input
-        type="text"
-        name="author"
-        placeholder="<%= toUpdateBook.author %>"
-        required
-      />
-    </label>
-    <br />
-    <label
-      >Genre:
-      <input
-        type="text"
-        name="genre"
-        placeholder="<%= toUpdateBook.genre %>"
-        required
-      />
-    </label>
-    <br />
-    <label
-      >Picture:
-      <input
-        type="text"
-        name="bookCover"
-        placeholder="<%= toUpdateBook.bookCover %>"
-      />
-    </label>
-    <br />
-    <label
-      >Plot:
-      <textarea
-        name="plot"
-        placeholder="<%= toUpdateBook.plot %>"
-        required
-      ></textarea>
-    </label>
-    <br />
-    <label
-      >ISBN:
-      <input
-        type="text"
-        name="isbn"
-        placeholder="<%= toUpdateBook.isbn %>"
-        required
-      />
-    </label>
-    <button type="submit">Update Book</button>
-  </form>
+        <br />
+        <label for="author">Author:</label>
+        <input
+          type="text"
+          name="author"
+          placeholder="<%= toUpdateBook.author %>"
+          required
+        />
+
+        <br />
+        <label for="genre">Genre: </label>
+        <input
+          type="text"
+          name="genre"
+          placeholder="<%= toUpdateBook.genre %>"
+          required
+        />
+
+        <br />
+        <label for="bookCover">Picture:</label>
+        <input
+          type="text"
+          name="bookCover"
+          placeholder="<%= toUpdateBook.bookCover %>"
+        />
+
+        <br />
+        <label for="plot">Plot:</label>
+        <textarea
+          name="plot"
+          placeholder="<%= toUpdateBook.plot %>"
+          required
+        ></textarea>
+
+        <br />
+        <label for="isbn">ISBN:</label>
+        <input
+          type="text"
+          name="isbn"
+          placeholder="<%= toUpdateBook.isbn %>"
+          required
+        />
+
+        <button type="submit" class="form-btn">Update Book</button>
+      </form>
+    </div>
+  </div>
 </div>
