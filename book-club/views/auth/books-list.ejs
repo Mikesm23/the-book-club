@@ -31,7 +31,9 @@
           <p><%= book.plot %></p>
           <br />
           <p>ISBN: <%= book.isbn %></p>
-          <a href="/book-details/<%= book.id %>">See details</a>
+          <form action="/book-details/<%= book.id %>" method="GET">
+            <button class="seedetails-btn" type="submit">See Details</button>
+          </form>
         </div>
       </div>
 

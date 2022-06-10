@@ -9,6 +9,16 @@ const saltRounds = 10
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 
 /* Sign In page */
+router.post('/search', async (req, res) => {
+console.log('SEE HERE', req.body)
+
+const searchTerm = req.body.search
+const detailsBooks = await Book.findOne({title: searchTerm})
+
+res.render('auth/book-details', {detailsBooks})
+})
+
+/* Sign In page */
 /* GET View Homepage(with Sign In form*/
 router.get("/login", (req, res) => {
   res.render("auth/login");
@@ -16,7 +26,6 @@ router.get("/login", (req, res) => {
 
 /* POST Login User */
 router.post('/login', (req, res) => {
-  //console.log('SESSION =====> ', req.session);
   const { email, password } = req.body;
 
   if (email === '' || password === '') {
