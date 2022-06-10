@@ -4,7 +4,14 @@
       <h3><%= detailsBooks.title%></h3>
     </div>
     <div id="bookdetails-cover">
+      <% if (detailsBooks.bookCover) {%>
       <img id="bookdetails-coverimage" src="<%= detailsBooks.bookCover%>" />
+      <%} else { %>
+      <img
+        id="bookdetails-coverimage"
+        src="https://images.unsplash.com/photo-1602399481667-07536109851e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+      />
+      <% } %>
     </div>
     <div class="book-details-div">
       <% if (typeof detailsBooks !== 'undefined') {%>
@@ -33,3 +40,5 @@
     </div>
   </div>
 </div>
+
+<!-- https://images.unsplash.com/photo-1602399481667-07536109851e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80 -->

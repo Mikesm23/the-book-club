@@ -355,8 +355,7 @@ transform: scale(1.1);
 
 /* Profile Page*/
 .full-screen-container-profile {
-  background-image: url("/images/bcg_image_updateprofile.jpg");
-  /* background-color: #00b7ff; */
+  background-image: url("/images/window.jpg");
   height: 100vh;
   width: 100%;
   background-size: cover;
@@ -364,33 +363,48 @@ transform: scale(1.1);
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-bottom: 500px; */
 }
 
 #profile-columns {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 640px;
-  color: #fff;
-  text-align: center;
-  padding: 100px 35px; */
-        /* border: 1px solid rgba(255, 255, 255, 0.3);
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 16px;
-        box-shadow: 0 4px 30px  rgba(0, 0, 0, 0.1); */
-  /* backdrop-filter: blur(5px);
-  background-color: rgb(56, 94, 90); */
 display: grid;
 grid-template-columns: repeat(2, 1fr);
-gap: 32px;
 }
 
 #profile-content {
-  background: #00b7ff;
-  border: 1px solid black;
+  border-right: 1px solid black;
+  font-size: 24px;
+  align-content: center;
+
+  border: 1px solid rgba(15, 102, 160, 0.4);
+  background: rgba(15, 118, 158, 0.4);
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0 4px 30px  rgba(24, 16, 128, 0.2);
+  backdrop-filter: blur(5px);
 }
+
+#book-list {
+  padding-top: 5px;
+  padding-left: 5px;
+  width: 650px;
+  height: 500px;
+  color: white;
+  font-size: 28px;
+  text-align: center;
+
+  border: 1px solid rgba(15, 102, 160, 0.4);
+  background: rgba(15, 118, 158, 0.4);
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 30px  rgba(24, 16, 128, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+
+.btn-div {
+  justify-content: center;
+  margin-top: 200px;
+  padding-top: 200px;
+}
+
 
 .btn-div {
   margin-top: 5px;
